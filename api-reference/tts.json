@@ -1,0 +1,71 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "SinaDLabs Text-to-Speech API",
+      "description": "API for converting text to speech using SinaDLabs",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api.sinadlabs.com/v1"
+      }
+    ],
+    "paths": {
+      "/audio/speech": {
+        "post": {
+          "summary": "Convert Text to Speech",
+          "description": "Converts the provided text to speech",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "input": {
+                      "type": "string",
+                      "description": "The input text to be converted to speech"
+                    },
+                    "voice": {
+                      "type": "string",
+                      "description": "The desired voice for the speech conversion"
+                    }
+                  },
+                  "required": ["input", "voice"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful conversion",
+              "content": {
+                "audio/mpeg": {
+                  "schema": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The converted speech audio"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "security": [
+      {
+        "BearerAuth": []
+      }
+    ]
+  }
+  

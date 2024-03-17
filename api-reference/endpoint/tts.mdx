@@ -1,0 +1,26 @@
+---
+title: 'TTS'
+
+---
+
+## Introduction
+
+The SNR Audio API provides endpoints for Text-to-Speech (TTS) and Automatic Speech Recognition (ASR). This documentation outlines how to use these endpoints to convert text to speech and transcribe audio files.
+
+## TTS Endpoint
+
+The TTS endpoint allows users to convert text into speech using various voices. It offers low-latency performance and supports streaming and WebSocket. 
+
+### Endpoint
+
+- **URL:** `/audio/speech`
+- **Method:** POST
+- **Authentication:** Bearer token
+
+### Request Body
+
+```json
+{
+  "input": "Text to be converted to speech",
+  "voice": "Desired voice for conversion"
+}

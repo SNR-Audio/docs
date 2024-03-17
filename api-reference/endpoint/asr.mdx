@@ -1,0 +1,38 @@
+---
+title: 'ASR Endpoint'
+
+---
+
+### Endpoint
+
+- **URL:** `/audio/transcriptions`
+- **Method:** POST
+- **Authentication:** Bearer token
+
+### Request Parameters
+
+- `file`: S3 URL path of the audio file
+- `language`: Language of transcription (optional)
+
+### Response
+
+Upon successful transcription, the API returns the transcribed text along with timestamps.
+
+Example Response:
+
+```json
+{
+  "text": "Transcribed text",
+  "timestamps": [
+    {
+      "start": 0,
+      "end": 5,
+      "text": "First five seconds of transcribed text"
+    },
+    {
+      "start": 5,
+      "end": 10,
+      "text": "Next five seconds of transcribed text"
+    }
+  ]
+}
