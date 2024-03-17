@@ -78,19 +78,11 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-<<<<<<< HEAD
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ],
-      "openapi":["/api-reference/openapi.json"]
-      
-=======
-        "api-reference/transcribe-audio-file",
-        "api-reference/endpoint/convert-text-to-speech"
-       
+        "api-reference/endpoint/convert-text-to-speech.mdx",
+        "api-reference/endpoint/transcribe-audio-file.mdx"
       ]
->>>>>>> 6ff0b7f (commit)
+      
+      
     }
   ],
   "footerSocials": {
@@ -98,10 +90,4 @@
     "github": "https://github.com/mintlify",
     "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
-<<<<<<< HEAD
 }
-=======
-  
- 
-}
->>>>>>> 6ff0b7f (commit)
