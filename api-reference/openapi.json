@@ -1,195 +1,273 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "SNR Audio",
+    "description": "",
     "version": "1.0.0"
   },
-  "servers": [
+  "tags": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "name": "SNR.audio"
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+    "/audio/speech": {
+      "post": {
+        "summary": "TTS",
+        "deprecated": false,
+        "description": "Our TTS (Text-to-Speech) API is a cutting-edge solution designed to seamlessly integrate with various applications requiring audio narration. With its low-latency performance and versatility, this API caters to a wide range of needs, including chat applications, blog narration, and video voice-overs. Leveraging state-of-the-art technology, The SNR TTS API offers affordability without compromising quality, enabling users to save up to 90% compared to other providers in the market, built with battery included features like -> Streaming, Websocket Support, Multispeaker",
+        "tags": [
+          "SNR.audio"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "type": "string",
+                    "description": "The input text to be converted to speech"
+                  },
+                  "voice": {
+                    "type": "string",
+                    "description": "The desired voice for the speech conversion"
+                  }
+                },
+                "required": [
+                  "input",
+                  "voice"
+                ]
+              },
+              "example": {
+                "input": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+                "voice": "adam"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "url": "https://openmic.s3.ap-south-1.amazonaws.com/tts_synthesized_videos/tmpl9765jae.wav?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3FLDXIKYWEGT4Z4J%2F20240315%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20240315T172208Z&X-Amz-Expires=1800&X-Amz-Signature=8c14f9e9a13bf41265d8cdc4cf0375dc950091d7a331333fae770d991473c6e2&X-Amz-SignedHeaders=host&x-id=GetObject"
+                    }
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+        "security": [
+          {
+            "bearer": []
           }
-        }
+        ]
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/audio/transcriptions": {
+      "post": {
+        "summary": "ASR API",
+        "deprecated": false,
+        "description": "The SNR.Audio ASR API facilitates the effortless transcription of audio files into text, streamlining the process of extracting valuable insights from spoken content. With support for a wide range of audio formats and languages, this API offers unparalleled flexibility and accuracy in converting audio recordings into readable text. By providing a simple endpoint for submitting audio files and specifying the target language, users can efficiently generate transcriptions suitable for various applications, including content indexing, sentiment analysis, and automated captioning",
+        "tags": [
+          "SNR.audio"
+        ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
+            "name": "file",
+            "in": "query",
+            "description": "The S3 url path to be provided to run the transcription",
+            "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The Language of Transcription",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    },
+                    "timestamps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "end": {
+                            "type": "number"
+                          },
+                          "start": {
+                            "type": "number"
+                          },
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "end",
+                          "start",
+                          "text"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "timestamps"
+                  ]
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "Tag": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Tag ID"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "name": {
+            "type": "string",
+            "description": "Tag Name"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Category ID"
           },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+          "name": {
+            "type": "string",
+            "description": "Category Name"
           }
-        ]
+        }
       },
-      "Error": {
+      "Pet": {
         "required": [
-          "error",
-          "message"
+          "name",
+          "photoUrls",
+          "id",
+          "category",
+          "tags",
+          "status"
         ],
         "type": "object",
         "properties": {
-          "error": {
+          "id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64",
+            "minimum": 1,
+            "description": "Pet ID"
           },
-          "message": {
-            "type": "string"
+          "category": {
+            "$ref": "#/components/schemas/Category",
+            "description": "group"
+          },
+          "name": {
+            "type": "string",
+            "description": "name",
+            "examples": [
+              "doggie"
+            ]
+          },
+          "photoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "image URL"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "description": "tag"
+          },
+          "status": {
+            "type": "string",
+            "description": "Pet Sales Status",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
           }
         }
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
+      "bearer": {
         "type": "http",
         "scheme": "bearer"
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.sinadlabs.com/v1",
+      "description": "https://api.sinadlabs.com/v1"
+    }
+  ]
 }
