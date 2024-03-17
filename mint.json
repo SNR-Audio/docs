@@ -81,8 +81,9 @@
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
-      ]
-      "openapi":["/api-reference/openapi.json"],
+      ],
+      "openapi":["/api-reference/openapi.json"]
+      
     }
   ],
   "footerSocials": {
