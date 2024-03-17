@@ -78,8 +78,8 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/convert-text-to-speech.mdx",
-        "api-reference/endpoint/transcribe-audio-file.mdx"
+        "api-reference/endpoint/convert-text-to-speech",
+        "api-reference/endpoint/transcribe-audio-file"
       ]
       
       
