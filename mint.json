@@ -5,7 +5,7 @@
     "dark": "/logo/snr.svg",
     "light": "/logo/snr.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "logo/favicon.svg",
   "colors": {
     "primary": "#00BFFF",
     "light": "#44adc7",
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Endpoints",
       "pages": [
         "api-reference/endpoint/convert-text-to-speech",
         "api-reference/endpoint/transcribe-audio-file"
