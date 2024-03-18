@@ -1,11 +1,12 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "SNR Audio",
+
   "logo": {
     "dark": "/logo/snr.svg",
     "light": "/logo/snr.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/snr.svg",
   "colors": {
     "primary": "#00BFFF",
     "light": "#44adc7",
