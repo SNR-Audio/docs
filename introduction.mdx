@@ -1,26 +1,68 @@
 ---
-title: 'Introduction'
-description: 'Introduction to SNR Audio API Documentation'
+title: "Introduction to SNR.audio"
+description: "Explore our Guides and API Reference to get the most out of SNR.audio."
 ---
 
-## Welcome to SNR Audio API Documentation
+---
 
-Welcome to the documentation for the SNR Audio API! This API provides powerful features for Text-to-Speech (TTS) and Automatic Speech Recognition (ASR). Whether you need to convert text into lifelike speech or transcribe audio files into text, SNR Audio API has got you covered.
+## [API Reference](/api-reference)
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="book-open-cover" href="/api-reference/introduction.mdx">
+    Dig into the details of using SNR Audio TTS and ASR APIs.
+  </Card>
+  <Card title="Speech to Text API" icon="microphone" href="/api-reference/speech-to-text">
+    Learn how to transcribe audio to text with our API.
+  </Card>
+  <Card title="Text to Speech API" icon="volume" href="/api-reference/text-to-speech">
+    Learn how to convert text to speech with our API.
+  </Card>
+  <Card title="Join Our Community" icon="comments" href="https://community.snr.audio">
+    A great place to ask questions and get help from the community.
+  </Card>
+</CardGroup>
 
-### Features
+---
 
-- **Text-to-Speech (TTS):** Convert text into high-quality speech with customizable voices.
-- **Automatic Speech Recognition (ASR):** Transcribe audio files into text with high accuracy.
 
-### Get Started
+## Guides
 
-To get started with the SNR Audio API, navigate through the provided documentation sections:
+This guide will help you get started with SNR.audio. We will cover everything, starting with creating an account.
 
-- Learn about the TTS endpoint to convert text into speech.
-- Explore the ASR endpoint to transcribe audio files into text.
+Once you have set up your account, we will move on to [Speech to Text](/endpoint/convert-speech-to-text.mdx). Here, you will be able to transcribe audio inputs into text outputs using our API.
 
-### Authentication
+Following that, we will delve into [Text to Speech](/api-reference/convert-text-to-speech.mdx). This section will guide you through converting text inputs into audio outputs, allowing you to generate speech using our API.
 
-All API endpoints require authentication using a Bearer token. Make sure to include your token in the request headers for authorization.
+We will also discuss various techniques to enhance the performance of our APIs, along with addressing any current limitations and challenges, providing troubleshooting tips, and sharing various best practices.
 
-Thank you for choosing SNR Audio API! If you have any questions or need assistance, feel free to reach out to our support team.
+
+### How do our AI models work?
+
+Our AI models have been trained on extensive datasets, enabling them to perform a wide range of tasks efficiently. Whether you require natural and conversational speech or more dramatic audio outputs, our models cater to diverse needs. We offer multiple models, each with its unique strengths and characteristics.
+
+An important aspect of our AI models is their contextual understanding. They can interpret text in various styles, adjusting their performance based on the provided context. For instance, if you input text resembling a narrative from a book, the AI will adapt its delivery accordingly. You can adjust parameters such as stability to widen the emotive range, albeit at the cost of some predictability.
+
+With each model update and retraining iteration, our AI becomes increasingly proficient in understanding different contexts, nuances in language, accents, and human speech patterns.
+
+
+## Account Registration
+
+You can register for an account using either email and password authentication or through Google OAuth.
+
+If you opt for email registration, you'll need to verify your email address before accessing our services. Once verified, you'll gain access to the Speech to Text and Text to Speech functionalities. Simply input your text or audio and utilize the respective API to perform conversions. Please note that each API call consumes your quota.
+
+
+## Subscriptions
+
+Upon registration, you'll be placed on our free tier. You can view and manage your subscription by clicking on your profile picture and selecting ["Subscription"](https://snr.audio/subscription).
+
+We offer several subscription plans, including `Free`, `Basic`, `Pro`, and `Enterprise`, each with its set of features and quotas. The subscription page provides detailed information on monthly character allotments, concurrent API usage, and audio quality.
+
+Custom voice creation and cloning are available on specific tiers. Cloned voices, for instance, are accessible from the `Pro` tier onwards.
+
+You can upgrade or downgrade your subscription at any time, with unused quotas rolling over to the next subscription cycle. However, unused quotas do not carry over between months.
+
+Usage rights for generated content vary based on your subscription tier. Commercial usage rights are granted for content generated on paid plans, while non-commercial usage with attribution is permitted on the free plan. Cloned voices may require additional permissions for commercial usage, even on paid plans.
+
+For detailed information on payment methods and billing, please refer to our [Help Center](https://help.snr.audio/).
+
+For any further assistance, feel free to explore our community forum or reach out to our support team.
