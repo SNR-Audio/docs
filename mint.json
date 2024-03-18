@@ -5,7 +5,7 @@
     "dark": "/logo/snr.svg",
     "light": "/logo/snr.svg"
   },
-  "favicon": "logo/favicon.svg",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#00BFFF",
     "light": "#44adc7",
