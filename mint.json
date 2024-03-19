@@ -3,10 +3,10 @@
   "name": "SNR Audio",
 
   "logo": {
-    "dark": "/logo/snr.svg",
-    "light": "/logo/snr.svg"
+    "dark": "/logo/SNR.svg",
+    "light": "/logo/SNR.svg"
   },
-  "favicon": "/logo/snr.svg",
+  "favicon": "/logo/SNR.svg",
   "colors": {
     "primary": "#00BFFF",
     "light": "#44adc7",
@@ -43,7 +43,7 @@
     },
     {
       "name": "Community",
-      "icon": "slack",
+      "icon": "Discord",
       "url": "https://mintlify.com/community"
     },
     {
