@@ -21,7 +21,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:founder@snr.audio"
     }
   ],
   "topbarCtaButton": {
@@ -30,7 +30,7 @@
   },
   "tabs": [
     {
-      "name": "API",
+      "name": "API Reference",
       "url": "api-reference"
     }
   ],
@@ -44,12 +44,12 @@
     {
       "name": "Community",
       "icon": "Discord",
-      "url": "https://mintlify.com/community"
+      "url": "https://discord.gg/eBBdEVt4"
     },
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://snr-50a59e.webflow.io/blog"
     }
   ],
   "navigation": [
@@ -79,8 +79,9 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/SNRAudio",
+    "github": "https://github.com/SNR-Audio",
+    "discord": "https://discord.gg/eBBdEVt4"
+   
   }
 }
