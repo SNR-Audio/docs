@@ -3,7 +3,7 @@
   "name": "SNR Audio",
 
   "logo": {
-    "dark": "/logo/SNR.svg",
+    "dark": "/logo/Dark.svg",
     "light": "/logo/SNR.svg"
   },
   "favicon": "/logo/SNR.svg",
@@ -25,7 +25,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
+    "name": "Home Page",
     "url": "https://dashboard.mintlify.com"
   },
   "tabs": [
