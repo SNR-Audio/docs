@@ -62,29 +62,27 @@
     {
       "group": "Get Started",
       "pages": [
-        "Introduction"
+        "introduction"
         
         
       ]
     },
     
+    
     {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoints",
+      "group": "Text to Speech",
       "pages": [
         "api-reference/endpoint/get-speaker",
         "api-reference/endpoint/convert-text-to-speech",
-        "api-reference/endpoint/process",
         "api-reference/endpoint/streaming-audio"
 
       ]
       
       
+    },
+    {
+      "group": "Speech to Text",
+      "pages":["api-reference/endpoint/process"]
     }
   ],
   "footerSocials": {
