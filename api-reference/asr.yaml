@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Audio Transcription Service
+  description: API for transcribing audio files
+  version: "1.0.0"
+servers:
+  - url: 'https://asr.sinadlabs.com/v1/rest'
+paths:
+  /transcribe:
+    post:
+      summary: Transcribe audio
+      description: Transcribes audio from a URL or a file upload.
+      operationId: transcribeAudio
+      tags:
+        - Transcription
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: The URL to the audio file for transcription.
+                file:
+                  type: string
+                  format: binary
+                  description: The audio file to upload and transcribe.
+              required:
+                - url
+      responses:
+        '200':
+          description: Successful transcription
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcription:
+                    type: string
+                    description: The transcribed text of the audio.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating an unauthorized request.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message indicating that the request was malformed.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
