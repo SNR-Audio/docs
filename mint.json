@@ -26,7 +26,7 @@
   ],
   "topbarCtaButton": {
     "name": "Home Page",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://www.snr.audio/"
   },
   "tabs": [
     {
@@ -35,6 +35,12 @@
     }
   ],
   
+  "openapi": [
+    "api-reference/asr.json","api-reference/tts.json"
+  ],
+  
+  
+
   "anchors": [
     {
       "name": "Documentation",
@@ -71,8 +77,12 @@
     {
       "group": "Endpoints",
       "pages": [
-        "api-reference/endpoint/convert-text-to-speech",
-        "api-reference/endpoint/transcribe-audio-file"
+        "api-reference/endpoint/get-speaker",
+        "api-reference/endpoint/main",
+        "api-reference/endpoint/process",
+        "api-reference/endpoint/streaming-audio-turbo",
+        "api-reference/endpoint/streaming-audio"
+
       ]
       
       
