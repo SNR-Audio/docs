@@ -1,1 +1,150 @@
-{"openapi":"3.1.0","info":{"title":"FastAPI","version":"0.1.0"},"paths":{"/v1/rest/speech/turbo_stream":{"post":{"summary":"Streaming Audio Turbo","operationId":"streaming_audio_turbo_v1_rest_speech_turbo_stream_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/receive_msg"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/v1/rest/speech/stream":{"post":{"summary":"Streaming Audio","operationId":"streaming_audio_v1_rest_speech_stream_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/receive_msg"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"KeyBearer":[]}]}},"/v1/rest/speech/list_speakers":{"get":{"summary":"Get Speaker","operationId":"get_speaker_v1_rest_speech_list_speakers_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}},"/v1/rest/speech":{"post":{"summary":"Main","description":"Request processor.\n\n1. Generate the synthesized audio \n2. save in respective s3 bucket.\n\nArgs:\n    gen_tts (receive_msg) : request body in json format\n\nReturn: \n    dict / json str : with the url and details of the output.","operationId":"main_v1_rest_speech_post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/receive_msg"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"KeyBearer":[]}]}}},"components":{"schemas":{"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"},"receive_msg":{"properties":{"input":{"type":"string","title":"Input","default":"hello world , Welcome to openMic"},"sample_rate":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Sample Rate","default":22050},"voice":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Voice"},"alpha":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Alpha","default":0.0},"beta":{"anyOf":[{"type":"number"},{"type":"null"}],"title":"Beta","default":0.0}},"type":"object","title":"receive_msg"}},"securitySchemes":{"KeyBearer":{"type":"http","scheme":"bearer"}}}}
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Text to Speech API",
+      "description": "API for converting text to speech",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://tts.sinadlabs.com/v1/rest"
+      }
+    ],
+    "paths": {
+      "/speech": {
+        "post": {
+          "summary": "Convert text to speech",
+          "operationId": "convertTextToSpeech",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextToSpeechRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TextToSpeechResponse"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ]
+        }
+      },
+      "/speech/list_speakers": {
+        "get": {
+          "summary": "List available speakers",
+          "operationId": "listSpeakers",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/speech/stream": {
+        "post": {
+          "summary": "Stream text to speech",
+          "operationId": "streamTextToSpeech",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextToSpeechRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "audio/wav": {
+                  "schema": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "TextToSpeechRequest": {
+          "type": "object",
+          "properties": {
+            "input": {
+              "type": "string",
+              "description": "Text to be converted to speech"
+            },
+            "sample_rate": {
+              "type": "integer",
+              "description": "Sample rate for the speech output"
+            },
+            "voice": {
+              "type": "string",
+              "description": "Voice for the speech output"
+            },
+            "alpha": {
+              "type": "number",
+              "description": "Alpha value"
+            },
+            "beta": {
+              "type": "number",
+              "description": "Beta value"
+            }
+          },
+          "required": ["input", "sample_rate"]
+        },
+        "TextToSpeechResponse": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "string",
+              "description": "Speech output in audio format"
+            }
+          }
+        }
+      }
+    }
+  }
+  

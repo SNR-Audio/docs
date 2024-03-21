@@ -62,7 +62,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction"
+        "Introduction"
         
         
       ]
@@ -78,9 +78,8 @@
       "group": "Endpoints",
       "pages": [
         "api-reference/endpoint/get-speaker",
-        "api-reference/endpoint/main",
+        "api-reference/endpoint/convert-text-to-speech",
         "api-reference/endpoint/process",
-        "api-reference/endpoint/streaming-audio-turbo",
         "api-reference/endpoint/streaming-audio"
 
       ]
