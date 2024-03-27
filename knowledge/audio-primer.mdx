@@ -1,0 +1,75 @@
+---
+title: "Audio Basics"
+---
+
+### A primer on key terms in Audio for beginners 
+
+By nature, a sound wave is a continuous signal, meaning it contains an infinite number of signal values in a given time. This poses problems for digital devices which expect finite arrays. To be processed, stored, and transmitted by digital devices, the continuous sound wave needs to be converted into a series of discrete values, known as a digital representations.
+
+<Card title="Sampling Rate" color="#ca8b04">
+  <Steps>
+    <Step title="Sampling and Sampling Rate">
+      <b>Sampling</b> is the process of measuring the value of a continuous signal at fixed time steps. The sampled waveform is discrete, since it contains a finite number of signal values at uniform intervals.The <b>Sampling rate</b> (also called sampling frequency) is the number of samples taken in one second and is measured in hertz (Hz). To give you a point of reference, CD-quality audio has a sampling rate of 44,100 Hz, meaning samples are taken 44,100 times per second. For comparison, high-resolution audio has a sampling rate of 192,000 Hz or 192 kHz. A common sampling rate used in training speech models is 16,000 Hz or 16 kHz.
+    </Step>
+    <Step title="Choice of Sampling Rate">
+      The choice of sampling rate primarily determines the highest frequency that can be captured from the signal. This is also known as the Nyquist limit and is exactly half the sampling rate. The audible frequencies in human speech are below 8 kHz and therefore sampling speech at 16 kHz is sufficient. Using a higher sampling rate will not capture more information and merely leads to an increase in the computational cost of processing such files. On the other hand, sampling audio at too low a sampling rate will result in information loss. Speech sampled at 8 kHz will sound muffled, as the higher frequencies cannot be captured at this rate.
+    </Step>
+    <Step title="Implication">
+      The sampling rate determines the time interval between successive audio samples, which impacts the temporal resolution of the audio data. Consider an example: a 5-second sound at a sampling rate of 16,000 Hz will be represented as a series of 80,000 values, while the same 5-second sound at a sampling rate of 8,000 Hz will be represented as a series of 40,000 values. 
+    </Step>
+  </Steps>
+
+</Card>
+<br> </br>
+<br> </br>
+<br> </br>
+
+
+<Card title="Amplitude and Bit Depth" color = "#ca8b04">
+ <Steps>
+ <Step title="Amplitude">
+      The <b>Amplitude</b> of a sound describes the sound pressure level at any given instant and is measured in decibels (dB). We perceive the amplitude as loudness. To give you an example, a normal speaking voice is under 60 dB, and a rock concert can be at around 125 dB, pushing the limits of human hearing.
+
+  </Step>    
+ 
+ <Step title = "Bit Depth">
+ In digital audio, each audio sample records the amplitude of the audio wave at a point in time, the <b>Bit Depth</b> of the sample determines with how much precision this amplitude value can be described. The higher the bit depth, the more faithfully the digital representation approximates the original continuous sound wave.
+ The most common audio bit depths are 16-bit and 24-bit. Each is a binary term, representing the number of possible steps to which the amplitude value can be quantized when it’s converted from continuous to discrete: 65,536 steps for 16-bit audio, a whopping 16,777,216 steps for 24-bit audio. The higher the bit depth, the more dynamic range the audio has, meaning it can capture both very quiet and very loud sounds.
+ </Step>
+
+
+
+ </Steps>
+</Card>
+
+<Card title = "Representation of Audio Data" color = "#ca8b04">
+ <Steps>
+  <Step title = "Spectrogram">
+  <br> </br>
+  <img height="180" noZoom src="spectrogram.png" />
+  <br> </br>
+  <br> </br>
+  A <b>spectrogram</b> is a visual representation of the spectrum of frequencies of a signal as it varies with time. It is commonly used in various fields such as music, linguistics, sonar, radar, speech processing, seismology, and ornithology. Spectrograms can be generated using methods like the short-time Fourier transform, optical spectrometers, band-pass filters, Fourier transform, or wavelet transform. They are typically depicted as heat maps, with time on one axis, frequency on another, and intensity represented by color or brightness. Spectrograms are valuable for analyzing audio signals, identifying spoken words phonetically, and studying animal calls. They are essential tools for understanding the frequency content of signals over time, aiding in tasks like speech recognition and sound analysis
+  </Step>
+
+  <Step title = "Waveform">
+  <br> </br>
+  <img height="180" noZoom src="waveform.png" />
+  <br> </br>
+  <br> </br>
+  An <b>Audio Waveform</b> is a visual representation of sound that displays changes in amplitude or level over time. It is a graph that shows how sound pressure varies with time, where the vertical scale represents sound pressure and the horizontal scale represents time. The waveform illustrates the alternating patterns of compression and rarefaction in sound waves, with positive and negative values on the sound pressure scale. Different types of waveforms can represent various sounds, from simple tones like sine waves to complex sounds with multiple components. Waveforms are commonly used in audio editing and analysis to visualize and understand sound characteristics.
+  </Step>
+  
+
+  <Step title = "Mel Spectrogram">
+  <br> </br>
+  <img height="180" noZoom src="melspectrogram.png" />
+  <br> </br>
+  <br> </br>
+  A <b>Mel spectrogram</b> is a type of spectrogram that applies a frequency-domain filter bank to audio signals that are windowed in time. It is commonly used in various fields like music, linguistics, sonar, radar, speech processing, seismology, and ornithology. Mel spectrograms can be generated using methods like the short-time Fourier transform, optical spectrometers, band-pass filters, Fourier transform, or wavelet transform. They are valuable for analyzing audio signals, identifying spoken words phonetically, and studying animal calls. Mel spectrograms are typically depicted as heat maps, with time on one axis, frequency on another, and intensity represented by color or brightness.
+
+  </Step>
+ </Steps>
+
+
+</Card>

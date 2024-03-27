@@ -3,15 +3,16 @@
   "name": "SNR Audio",
 
   "logo": {
-    "dark": "/logo/Dark.svg",
+    "dark": "/logo/SNR.svg",
     "light": "/logo/SNR.svg"
   },
   "favicon": "/logo/SNR.svg",
   "colors": {
-    "primary": "#00BFFF",
-    "light": "#44adc7",
-    "dark": "#44adc7"
+    "primary": "#555555",
+    "dark": "#2596be",
+    "light": "#ff4d4d"
   },
+ 
     
   "backgroundImage": "/Docs.png",
   
@@ -83,6 +84,15 @@
     {
       "group": "Speech to Text",
       "pages":["api-reference/endpoint/transcribe-audio"]
+    },
+
+    {
+      "group": "Knowledge",
+      "pages": [
+        "knowledge/audio-primer"
+       
+        
+      ]
     }
   ],
   "footerSocials": {
