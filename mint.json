@@ -26,8 +26,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Home Page",
-    "url": "https://www.snr.audio/"
+    "name": "Dashboard",
+    "url": "https://app.snr.audio/"
   },
   "tabs": [
     {
@@ -89,7 +89,8 @@
     {
       "group": "Knowledge",
       "pages": [
-        "knowledge/audio-primer"
+        "knowledge/audio-primer",
+        "knowledge/audio-encodings"
        
         
       ]

@@ -78,5 +78,48 @@ By nature, a sound wave is a continuous signal, meaning it contains an infinite 
   </Step>
  </Steps>
 
-
 </Card>
+<br> </br>
+<br> </br>
+<br> </br>
+### Quantization
+ <b>Quantization</b> is the process of mapping a large set of input values to a smaller set of output values. In digital audio, quantization refers to the conversion of continuous-amplitude audio samples into discrete, numerical values that can be represented by a finite number of bits.Quantization involves the following steps:
+<Card color = "#ca8b04">
+ <Steps>
+   <Step title="Sampling">
+    First, the continuous analog audio signal is sampled at regular intervals to obtain discrete-time samples.
+   </Step>
+   <Step title="Amplitude">
+   Each signals , Amplitude is measured is scaled to a specific range of values. For example, a 16-bit audio signal has a range of 65,536 possible values, while a 24-bit audio signal has a range of 16,777,216 possible values.
+   </Step>
+  <Step title="Quantization">
+   The scaled amplitude value is then rounded off to the nearest value within a predefined set of discrete values, called quantization levels. This process introduces a quantization error, which is the difference between the original analog value and the quantized digital value.
+  </Step>
+  <Step title="Binary Encoding">
+  The quantized values are encoded into binary form for storage or transmission.
+  </Step>
+ </Steps>
+</Card>
+<br> </br>
+<br> </br>
+<br> </br>
+
+### Psychoacoustic Modeling
+<b>Psychoacoustic modeling</b> is a technique used in audio encoding that exploits the limitations of human auditory perception to optimize the audio compression process. It identifies and removes or reduces the bits allocated to parts of the audio signal that are less perceptible to human listeners, thus reducing the data rate without significantly degrading audio quality.
+<Card color = "#ca8b04">
+ <Steps>
+   <Step title="Frequency Masking:">
+     Louder sounds can mask quieter sounds at nearby frequencies, making them less audible. Psychoacoustic models identify masked frequencies and allocate fewer bits to encode them.
+   </Step>
+   <Step title="Temporal Masking:">
+    A strong sound can temporarily reduce the perceived loudness of a weaker sound that occurs shortly before or after it. Encoders exploit this by allocating fewer bits to the masked temporal regions.
+   </Step>
+  <Step title="Simultaneous Masking:">
+   This effect occurs when a loud sound masks other sounds happening simultaneously.
+  </Step>
+  <Step title="Masking Threshold:">
+  Encoders estimate the minimum level at which a sound becomes audible, called the masking threshold. Audio components below this threshold are discarded or encoded with fewer bits.
+  </Step>
+ </Steps>
+</Card>
+
