@@ -83,7 +83,9 @@
     },
     {
       "group": "Speech to Text",
-      "pages":["api-reference/endpoint/transcribe-audio"]
+      "pages":["api-reference/endpoint/transcribe-audio",
+               "api-reference/endpoint/transcribe-live-audio"
+    ]
     },
 
     {

@@ -1,1 +1,241 @@
-{"openapi":"3.1.0","info":{"title":"FastAPI","version":"0.1.0"},"paths":{"/v1/rest/transcribe":{"post":{"summary":"Process","operationId":"process_v1_rest_transcribe_post","requestBody":{"content":{"multipart/form-data":{"schema":{"allOf":[{"$ref":"#/components/schemas/Body_process_v1_rest_transcribe_post"}],"title":"Body"}}}},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"KeyBearer":[]}]}}},"components":{"schemas":{"Body_process_v1_rest_transcribe_post":{"properties":{"url":{"type":"string","title":"Url"},"enable":{"type":"string","title":"Enable"},"file":{"type":"string","format":"binary","title":"File"}},"type":"object","title":"Body_process_v1_rest_transcribe_post"},"HTTPValidationError":{"properties":{"detail":{"items":{"$ref":"#/components/schemas/ValidationError"},"type":"array","title":"Detail"}},"type":"object","title":"HTTPValidationError"},"ValidationError":{"properties":{"loc":{"items":{"anyOf":[{"type":"string"},{"type":"integer"}]},"type":"array","title":"Location"},"msg":{"type":"string","title":"Message"},"type":{"type":"string","title":"Error Type"}},"type":"object","required":["loc","msg","type"],"title":"ValidationError"}},"securitySchemes":{"KeyBearer":{"type":"http","scheme":"bearer"}}}}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Automatic Speech Recognition API",
+    "description": "This API provides endpoints for automatic speech recognition (ASR) operations.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "ASR Team",
+      "email": "asr-team@example.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://asr.snr.audio/v1/rest",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/v1/rest/transcribelive": {
+      "post": {
+        "summary": "Transcribe Live Audio",
+        "description": "Transcribes live audio input in real-time.",
+        "operationId": "transcribe_live_audio",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveAudioRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Transcription Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranscriptionResult"
+                },
+                "example": {
+                  "text": "This is the transcribed text."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Invalid audio format."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Unauthorized access."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "KeyBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/rest/transcribe": {
+      "post": {
+        "summary": "Transcribe Audio File",
+        "description": "Transcribes audio file.",
+        "operationId": "transcribe_audio_file",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioFileRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Transcription Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranscriptionResult"
+                },
+                "example": {
+                  "text": "This is the transcribed text."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Invalid audio format."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Unauthorized access."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "KeyBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LiveAudioRequestBody": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Live audio file to be transcribed."
+          }
+        },
+        "required": ["file"]
+      },
+      "AudioFileRequestBody": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Audio file to be transcribed."
+          }
+        },
+        "required": ["file"]
+      },
+      "TranscriptionResult": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Transcribed text."
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message."
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorItem"
+            }
+          }
+        }
+      },
+      "ValidationErrorItem": {
+        "type": "object",
+        "properties": {
+          "loc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "KeyBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
