@@ -1,33 +1,31 @@
+
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "FastAPI",
-    "version": "0.1.0"
+    "title": "Speech Synthesis API",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://tts.snr.audio/v1/rest",
-      "description": "REST API Server"
-    },
-    {
-      "url": "wss://tts.snr.audio/v1/rest/speech/ws",
-      "description": "WebSocket Server"
+      "url": "https://tts.snr.audio/",
+      "description": "Production server"
     }
   ],
   "paths": {
-    "/speech/turbo_stream": {
+    "/v1/rest/speech/turbo_stream": {
       "post": {
         "summary": "Streaming Audio Turbo",
         "operationId": "streaming_audio_turbo_v1_rest_speech_turbo_stream_post",
+        "description": "Stream audio with turbo speed.",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/receive_msg"
+                "$ref": "#/components/schemas/SpeechRequestBody"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -51,19 +49,20 @@
         }
       }
     },
-    "/speech/stream": {
+    "/v1/rest/speech/stream": {
       "post": {
         "summary": "Streaming Audio",
         "operationId": "streaming_audio_v1_rest_speech_stream_post",
+        "description": "Stream audio at regular speed.",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/receive_msg"
+                "$ref": "#/components/schemas/SpeechRequestBody"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -92,10 +91,11 @@
         ]
       }
     },
-    "/speech/list_speakers": {
+    "/v1/rest/speech/list_speakers": {
       "get": {
-        "summary": "Get Speaker",
-        "operationId": "get_speaker_v1_rest_speech_list_speakers_get",
+        "summary": "Get Speaker List",
+        "operationId": "get_speaker_list_v1_rest_speech_list_speakers_get",
+        "description": "Retrieve the list of available speakers.",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -105,23 +105,28 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "KeyBearer": []
+          }
+        ]
       }
     },
-    "/speech": {
+    "/v1/rest/speech": {
       "post": {
-        "summary": "Main",
-        "description": "Request processor.\n\n1. Generate the synthesized audio \n2. save in respective s3 bucket.\n\nArgs:\n    gen_tts (receive_msg) : request body in json format\n\nReturn: \n    dict / json str : with the url and details of the output.",
-        "operationId": "main_v1_rest_speech_post",
+        "summary": "Speech Synthesis",
+        "description": "Process the speech synthesis request.",
+        "operationId": "speech_synthesis_v1_rest_speech_post",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/receive_msg"
+                "$ref": "#/components/schemas/SpeechRequestBody"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -154,23 +159,24 @@
   "components": {
     "schemas": {
       "HTTPValidationError": {
+        "type": "object",
         "properties": {
           "detail": {
+            "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
+            }
           }
         },
-        "type": "object",
         "title": "HTTPValidationError"
       },
       "ValidationError": {
+        "type": "object",
         "properties": {
           "loc": {
+            "type": "array",
             "items": {
-              "anyOf": [
+              "oneOf": [
                 {
                   "type": "string"
                 },
@@ -179,7 +185,6 @@
                 }
               ]
             },
-            "type": "array",
             "title": "Location"
           },
           "msg": {
@@ -191,7 +196,6 @@
             "title": "Error Type"
           }
         },
-        "type": "object",
         "required": [
           "loc",
           "msg",
@@ -199,75 +203,52 @@
         ],
         "title": "ValidationError"
       },
-      "receive_msg": {
+      "SpeechRequestBody": {
+        "type": "object",
         "properties": {
           "input": {
             "type": "string",
-            "title": "Input",
-            "default": "hello world , Welcome to openMic"
+            "title": "Text Input",
+            "default": "Hello world, welcome to OpenMic"
           },
           "voice": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Voice"
+            "type": "string",
+            "title": "Voice Type"
           },
           "similarity": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
             "title": "Similarity",
+            "description": "The similarity sadjusts how faithfully the AI replicates the original voice, with higher settings potentially reproducing artifacts or background noise from poor-quality recordings, Should be between 0 and 1.",
+            "minimum": 0,
+            "maximum": 1,
             "default": 0.0
           },
           "expressiveness": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
             "title": "Expressiveness",
+            "description": "Higher expressiveness in the model enables it to discern contextual cues from the text, allowing it to appropriately convey emotions such as humor, anger, sadness, or neutrality in the generated output, Should be between 0 and 1.",
+            "minimum": 0,
+            "maximum": 1,
             "default": 0.0
           },
           "pitch": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
             "title": "Pitch",
-            "default": 1.0
+            "description": "Pitch level of the synthesized speech. Should be between 0.5 and 1.5",
+            "minimum": 0.5,
+            "maximum": 1.5,
+            "default": 1
           },
           "speed": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "number",
             "title": "Speed",
+            "description": "Speed level of the synthesized speech. Should be between 0.5 and 2.0",
+            "minimum": 0.5,
+            "maximum": 2,
             "default": 1.0
           }
         },
-        "type": "object",
-        "title": "receive_msg"
+        "title": "SpeechRequestBody"
       }
     },
     "securitySchemes": {
