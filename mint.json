@@ -46,7 +46,7 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://snr.mintlify.app/"
+      "url": "https://docs.snr.audio"
     },
     {
       "name": "Community",
@@ -56,7 +56,7 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://snr-50a59e.webflow.io/blog"
+      "url": "https://snr.audio/blog"
     }
   ],
   "navigation": [
@@ -87,7 +87,12 @@
       "group": "Speech to Text",
       "pages":["api-reference/endpoint/transcribe-audio",
                "api-reference/endpoint/transcribe-live-audio"
+              
     ]
+  },
+    {
+      "group": "Websockets",
+      "pages":["api-reference/websockets/websockets"]
     },
 
     {
