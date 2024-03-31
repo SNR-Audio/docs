@@ -75,7 +75,9 @@
       "pages": [
         "api-reference/endpoint/get-speaker",
         "api-reference/endpoint/convert-text-to-speech",
-        "api-reference/endpoint/streaming-audio"
+        "api-reference/endpoint/streaming-audio",
+        "api-reference/endpoint/streaming-audio-turbo"
+
 
       ]
       
