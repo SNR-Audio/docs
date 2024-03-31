@@ -218,7 +218,7 @@
           "similarity": {
             "type": "number",
             "title": "Similarity",
-            "description": "The similarity sadjusts how faithfully the AI replicates the original voice, with higher settings potentially reproducing artifacts or background noise from poor-quality recordings, Should be between 0 and 1.",
+            "description": "The similarity adjusts how faithfully the AI replicates the original voice, with higher settings potentially reproducing artifacts or background noise from poor-quality recordings, Should be between 0 and 1.",
             "minimum": 0,
             "maximum": 1,
             "default": 0.0

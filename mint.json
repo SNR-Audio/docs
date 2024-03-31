@@ -4,7 +4,7 @@
 
   "logo": {
     "dark": "/images/dark.svg",
-    "light": "images/light.svg"
+    "light": "/images/light.svg"
   },
   "favicon": "/logo/SNR.svg",
   "colors": {
