@@ -10,8 +10,19 @@ This API provides real-time text-to-speech conversion using WebSockets. It allow
 The WebSocket endpoint for the Text-to-Speech API is:
 
 ```
-wss://tts.snr.audio/v1/rest/speech/ws
+wss://tts.snr.audio/v1/speech/ws
 ```
+
+## Ideal Usecase for the Websockets Endpoint
+- The input text is being streamed or in chunks.
+- Word-to-audio alignment information is required.
+
+
+## Use our Streaming Endpoint wherever:
+- The entire input text is available with you. 
+- Prototyping or testing the API, rapidly converting text to speech
+
+
 
 ## Protocol
 

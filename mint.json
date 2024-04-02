@@ -3,14 +3,14 @@
   "name": "SNR Audio",
 
   "logo": {
-    "dark": "/images/dark.svg",
-    "light": "/images/light.svg"
+    "dark": "/images/logo.svg",
+    "light": "/images/logo.svg"
   },
-  "favicon": "/logo/SNR.svg",
+  "favicon": "/images/logo.svg",
   "colors": {
     "primary": "#555555",
-    "dark": "#2596be",
-    "light": "#ff4d4d"
+    "dark": "#008000",
+    "light": "#FF0000"
   },
  
     
