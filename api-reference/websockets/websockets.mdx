@@ -79,7 +79,7 @@ async def stream_audio(audio_stream):
     # Your implementation for streaming audio
 
 async def text_to_speech_input_streaming(text_iterator):
-    uri = "wss://tts.snr.audio/v1/rest/speech/ws"
+    uri = "wss://tts.snr.audio/v1/speech/ws"
     async with websockets.connect(uri) as websocket:
         async def listen():
             # Your implementation for listening to audio data
