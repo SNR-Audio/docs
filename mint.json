@@ -75,7 +75,8 @@
       "pages": [
         "api-reference/endpoint/get-speaker",
         "api-reference/endpoint/speech-synthesis",
-        "api-reference/endpoint/streaming-audio"
+        "api-reference/endpoint/streaming-audio",
+        "api-reference/websockets/websockets"
         
 
 
@@ -90,10 +91,7 @@
               
     ]
   },
-    {
-      "group": "Websockets",
-      "pages":["api-reference/websockets/websockets"]
-    },
+    
 
     {
       "group": "Knowledge",

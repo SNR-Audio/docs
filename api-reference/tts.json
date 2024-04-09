@@ -1,4 +1,3 @@
-
 {
   "openapi": "3.1.0",
   "info": {
@@ -342,27 +341,35 @@
           "input": {
             "type": "string",
             "title": "Input",
-            "default": "SNR Audio ,helps you generate High Quality , Human Like speech at one-tenth the cost"
+            "default": "SNR Audio, helps you generate High Quality, Human-Like speech at one-tenth the cost"
           },
           "voice": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Voice"
+            "type": "string",
+            "title": "Voice",
+            "enum": [
+              "rachel",
+              "arnold",
+              "clyde",
+              "thomas",
+              "lily",
+              "sarah",
+              "giovanni",
+              "chris",
+              "antoni",
+              "glinda",
+              "matilda"
+            ]
           },
           "similarity": {
             "type": "number",
             "title": "Similarity",
+            "description": "Controls the similarity of generated speech to the specified voice. 0.0 means least similar, 1.0 means most similar.",
             "default": 0.0
           },
           "expressiveness": {
             "type": "number",
             "title": "Expressiveness",
+            "description": "Controls the expressiveness of the generated speech. 0.0 means least expressive, 1.0 means most expressive.",
             "minimum": 0.0,
             "maximum": 1.0,
             "default": 0.0
@@ -370,6 +377,7 @@
           "pitch": {
             "type": "number",
             "title": "Pitch",
+            "description": "Controls the pitch of the generated speech. 0.5 means half the original pitch, 1.0 means original pitch, 1.5 means 1.5 times the original pitch.",
             "minimum": 0.5,
             "maximum": 1.5,
             "default": 1.0
@@ -377,13 +385,15 @@
           "speed": {
             "type": "number",
             "title": "Speed",
+            "description": "Controls the speed of the generated speech. 0.5 means half the original speed, 1.0 means original speed, 2.0 means twice the original speed.",
             "minimum": 0.5,
             "maximum": 2.0,
             "default": 1.0
           }
         },
         "type": "object",
-        "title": "TextToSpeechRequest"
+        "title": "TextToSpeechRequest",
+        "required": ["input", "voice"]
       }
     },
     "securitySchemes": {
