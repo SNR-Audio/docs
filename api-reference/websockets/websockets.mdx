@@ -74,18 +74,55 @@ import websockets
 import json
 import base64
 import nltk
+import subprocess
 
-async def stream_audio(audio_stream):
-    # Your implementation for streaming audio
+
 
 async def text_to_speech_input_streaming(text_iterator):
-    uri = "wss://tts.snr.audio/v1/speech/ws"
+    AVAILABLE_FORMATES = [
+        "mp3_44100_192",
+        "mp3_44100_128",
+        "mp3_44100_64",
+        "mp3_44100_32",
+        "mp3_44100_16",
+        "mp3_22050_192",
+        "mp3_22050_128",
+        "pcm_16000",	
+        "pcm_22050",	
+        "pcm_24000",	
+        "pcm_44100",	
+        "mulaw_8000"
+    ]
+    audio_encoding = "mulaw_8000"
+    auth_token ="YOUR_AUTH_TOKEN"
+    uri = f"wss://tts.snr.audio/v1/speech/ws?token={auth_token}&output_formate={audio_encoding}"
     async with websockets.connect(uri) as websocket:
         async def listen():
-            # Your implementation for listening to audio data
-        listen_task = asyncio.create_task(stream_audio(listen()))
+            message = await websocket.recv()
+            data = json.loads(message)
+            
+            if data.get("audio"):
+                audio_data = base64.b64decode(data["audio"])
+            """Stream audio data using mpv player."""
+            mpv_process = subprocess.Popen(
+                ["mpv", "--no-cache", "--no-terminal", "--", "fd://0"],
+                stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+
+            print(f"Started streaming audio ")
+            #async for chunk in audio_data:
+            #    if chunk:
+            mpv_process.stdin.write(audio_data)
+            mpv_process.stdin.flush()
+
+            if mpv_process.stdin:
+                mpv_process.stdin.close()
+            mpv_process.wait()
+            
+        listen_task = asyncio.create_task(listen())
 
         async for text in text_iterator:
+            print(f"sending {text} to SNR")
             payload = {
                 "text": text,
                 "voice": "sarah",
@@ -117,7 +154,7 @@ async def chat_completion(text):
 
 # Main execution
 if __name__ == "__main__":
-    user_query = """Your text here"""
+    user_query = """\"Hi how are you ... this is raghuram i want to see how the world is working Hi how are you ... this is raghuram i want to see how the world is working\""""
     asyncio.run(chat_completion(user_query))
 ```
 
