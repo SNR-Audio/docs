@@ -74,8 +74,8 @@
       "group": "Text to Speech",
       "pages": [
         "api-reference/endpoint/get-speaker",
-        "api-reference/endpoint/speech-synthesis",
         "api-reference/endpoint/streaming-audio",
+        "api-reference/endpoint/speech-synthesis",
         "api-reference/websockets/websockets"
         
 
