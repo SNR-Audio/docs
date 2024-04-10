@@ -1,6 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "SNR Audio",
+  "theme": "dark",
 
   "logo": {
     "dark": "/images/logo.svg",
@@ -9,16 +10,10 @@
   "favicon": "/images/logo.svg",
   "colors": {
     "primary": "#555555",
-    "dark": "#008000",
-    "light": "#FF0000"
+    "dark": "#FFF000",
+    "light": "#FFF000"
   },
- 
-    
-  "backgroundImage": "/Docs.png",
-  
- 
-  
- 
+
   "topbarLinks": [
     {
       "name": "Support",
@@ -35,12 +30,8 @@
       "url": "api-reference"
     }
   ],
-  
-  "openapi": [
-    "api-reference/asr.json","api-reference/tts.json"
-  ],
-  
-  
+
+  "openapi": ["api-reference/asr.json", "api-reference/tts.json"],
 
   "anchors": [
     {
@@ -62,14 +53,9 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "introduction"
-        
-        
-      ]
+      "pages": ["introduction"]
     },
-    
-    
+
     {
       "group": "Text to Speech",
       "pages": [
@@ -77,36 +63,24 @@
         "api-reference/endpoint/streaming-audio",
         "api-reference/endpoint/speech-synthesis",
         "api-reference/websockets/websockets"
-        
-
-
       ]
-      
-      
     },
     {
       "group": "Speech to Text",
-      "pages":["api-reference/endpoint/transcribe-audio",
-               "api-reference/endpoint/transcribe-live-audio"
-              
-    ]
-  },
-    
+      "pages": [
+        "api-reference/endpoint/transcribe-audio",
+        "api-reference/endpoint/transcribe-live-audio"
+      ]
+    },
 
     {
       "group": "Knowledge",
-      "pages": [
-        "knowledge/audio-primer",
-        "knowledge/audio-encodings"
-       
-        
-      ]
+      "pages": ["knowledge/audio-primer", "knowledge/audio-encodings"]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/SNRAudio",
     "github": "https://github.com/SNR-Audio",
     "discord": "https://discord.gg/eBBdEVt4"
-   
   }
 }
