@@ -10,8 +10,8 @@
   "favicon": "/images/logo.svg",
   "colors": {
     "primary": "#555555",
-    "dark": "#410056",
-    "light": "#410056"
+    "dark": "#9078C0",
+    "light": "#9078C0"
   },
 
   "topbarLinks": [
