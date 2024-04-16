@@ -10,8 +10,13 @@
   "favicon": "/images/logo.svg",
   "colors": {
     "primary": "#555555",
+<<<<<<< HEAD
     "dark": "#FFF000",
     "light": "#FFF000"
+=======
+    "dark": "#4E2A84",
+    "light": "#4E2A84"
+>>>>>>> 4ac9117 (commit)
   },
 
   "topbarLinks": [
