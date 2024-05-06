@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://asr.snr.audio/v1/rest",
+      "url": "https://asr.snr.audio/",
       "description": "Production Server"
     }
   ],
