@@ -1,0 +1,109 @@
+---
+title: "Websockets "
+icon: "bolt"
+---
+
+This API provides real-time speech-to-text conversion using WebSockets. It allows you to send audio data and receive text response back in real-time.
+
+## Endpoint
+
+The WebSocket endpoint for the Text-to-Speech API is:
+
+```
+wss://asr.snr.audio/v1/ws/transcribelive
+```
+
+## Ideal Usecase for the Websockets Endpoint
+- The input audio is being streamed.
+
+
+## Use our Streaming Endpoint wherever:
+- The entire input audio is available with you. 
+- Prototyping or testing the API, rapidly converting speech to text
+
+
+## Protocol
+
+The WebSocket API uses a bidirectional protocol that encodes all messages as JSON objects.
+
+## Streaming Input Text
+
+The client can send messages with audio input to the server. The messages should contain the following fields:
+
+```json
+{"audio": audio_chunk,
+"xi_api_key":f"{auth_token}"
+}
+
+audio: base64
+```
+
+## Streaming Output Audio
+
+The server responds with a string containing the speech text:
+
+```string
+speech text
+```
+
+## Example Script
+
+The following example demonstrates how to use the WebSocket API to convert text to speech in real-time using Python:
+
+```python
+import asyncio
+import websockets
+import pyaudio
+import wave
+import json 
+import base64
+
+auth_token = "Your Bearer Token"
+
+def save_audio_to_wav(audio_data, filename, sample_width, channels, sample_rate):
+    with wave.open(filename, 'wb') as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(sample_width)
+        wf.setframerate(sample_rate)
+        wf.writeframes(audio_data)
+
+async def audio_stream(websocket):
+    CHUNK = 1024
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 44100
+    CHUNK_DURATION = 3
+
+    p = pyaudio.PyAudio()
+    stream = p.open(format=FORMAT,channels=CHANNELS,rate=RATE,input=True,frames_per_buffer=CHUNK)
+
+    print("Recording...")
+
+    try:
+        while True:
+            frames = []
+            for i in range(0, int(RATE / CHUNK * CHUNK_DURATION)):
+                data = stream.read(CHUNK)
+                frames.append(data)
+
+            audio_chunk = b''.join(frames)
+            save_audio_to_wav(audio_chunk, 'output.wav', sample_width=2, channels=1, sample_rate=44100)
+            audio_chunk = base64.b64encode(audio_chunk).decode('utf-8')
+            message = json.dumps({"audio": audio_chunk, "xi_api_key":f"{auth_token}"})
+            await websocket.send(message)
+            response = await websocket.recv()
+            print("Server Response:", response)
+    except websockets.exceptions.ConnectionClosedError:
+        print("Connection closed")
+
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+
+headers = {"xi_api_key":f"{auth_token}"}
+async def connect_to_server():
+    async with websockets.connect("wss://asr.snr.audio/v1/ws/transcribelive",extra_headers=headers) as websocket:
+        await audio_stream(websocket)
+
+asyncio.get_event_loop().run_until_complete(connect_to_server())
+```
