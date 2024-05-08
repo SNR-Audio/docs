@@ -31,8 +31,9 @@ The WebSocket API uses a bidirectional protocol that encodes all messages as JSO
 The client can send messages with audio input to the server. The messages should contain the following fields:
 
 ```json
-{"audio": audio_chunk,
-"xi_api_key": f"{auth_token}"
+{
+    "audio": audio_chunk,
+    "xi_api_key": f"{auth_token}"
 }
 
 audio: base64
