@@ -62,14 +62,15 @@
         "api-reference/endpoint/get-speaker",
         "api-reference/endpoint/streaming-audio",
         "api-reference/endpoint/speech-synthesis",
-        "api-reference/websockets/websockets"
+        "api-reference/websockets/tts-websockets"
       ]
     },
     {
       "group": "Speech to Text",
       "pages": [
         "api-reference/endpoint/transcribe-audio",
-        "api-reference/endpoint/transcribe-live-audio"
+        "api-reference/endpoint/transcribe-live-audio",
+        "api-reference/websockets/asr-websockets"
       ]
     },
 
