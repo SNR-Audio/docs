@@ -1,406 +1,433 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "FastAPI Text-to-Speech API",
-    "version": "1.0.0"
-  },
-  "servers": [
+    "openapi": "3.1.0",
+    "info": {
+      "title": "FastAPI",
+      "version": "0.1.0"
+    },
+    "servers": [
     {
       "url": "https://tts.snr.audio/",
       "description": "Production Server"
-    }
-  ],
-  "paths": {
-    "/v1/rest/speech/turbo_stream": {
-      "post": {
-        "summary": "Turbo Stream Audio",
-        "operationId": "turbo_stream_audio_v1_rest_speech_turbo_stream_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextToSpeechRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
+    }],
+    "paths": {
+      "/v1/rest/speech/turbo_stream": {
+        "post": {
+          "summary": "Streaming Audio Turbo",
+          "operationId": "streaming_audio_turbo_v1_rest_speech_turbo_stream_post",
+          "requestBody": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/receive_msg"
                 }
               }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rest/speech/stream": {
-      "post": {
-        "summary": "SNR Audio Streaming",
-        "description": "Low Latency Endpoint with reduced response time compared to the standard endpoint.",
-        "operationId": "stream_audio_v1_rest_speech_stream_post",
-        "security": [
-          {
-            "KeyBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "codec",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "mp3_44100_192",
-                "mp3_44100_128",
-                "mp3_44100_64",
-                "mp3_44100_32",
-                "mp3_44100_16",
-                "mp3_22050_192",
-                "mp3_22050_128",
-                "pcm_16000",
-                "pcm_22050",
-                "pcm_24000",
-                "pcm_44100",
-                "mulaw_8000"
-              ],
-              "default": "mp3_44100_128",
-              "title": "Output Format"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextToSpeechRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rest/speech/list_speakers": {
-      "get": {
-        "summary": "Voices",
-        "operationId": "get_speakers_endpoint_v1_rest_speech_list_speakers_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "KeyBearer": []
-          }
-        ]
-      }
-    },
-    "/v1/rest/speech": {
-      "post": {
-        "summary": "Text to Speech",
-        "description": "High Quality Text to Speech API helpful for all tasks from generating high quality audiobooks, to NPC Dialouge Generation ",
-        "operationId": "main_text_to_speech_v1_rest_speech_post",
-        "security": [
-          {
-            "KeyBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "codec",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "mp3_44100_192",
-                "mp3_44100_128",
-                "mp3_44100_64",
-                "mp3_44100_32",
-                "mp3_44100_16",
-                "mp3_22050_192",
-                "mp3_22050_128",
-                "pcm_16000",
-                "pcm_22050",
-                "pcm_24000",
-                "pcm_44100",
-                "mulaw_8000"
-              ],
-              "default": "mp3_44100_128",
-              "title": "Output Format"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextToSpeechRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rest/speech/demo": {
-      "post": {
-        "summary": "Demo Endpoint",
-        "description": "Demonstration endpoint for Text-to-Speech functionality.",
-        "operationId": "main_demo_text_to_speech_v1_rest_speech_demo_post",
-        "parameters": [
-          {
-            "name": "codec",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "mp3_44100_192",
-                "mp3_44100_128",
-                "mp3_44100_64",
-                "mp3_44100_32",
-                "mp3_44100_16",
-                "mp3_22050_192",
-                "mp3_22050_128",
-                "pcm_16000",
-                "pcm_22050",
-                "pcm_24000",
-                "pcm_44100",
-                "mulaw_8000"
-              ],
-              "default": "mp3_44100_128",
-              "title": "Output Format"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextToSpeechRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
             },
-            "type": "array",
-            "title": "Detail"
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
           }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
+        }
       },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
+      "/v1/rest/speech/stream": {
+        "post": {
+          "summary": "Streaming Audio",
+          "description": "Low Latency Endpoint with reduced response time compared to the standard endpoint.",
+          "operationId": "streaming_audio_v1_rest_speech_stream_post",
+          "security": [
+            {
+              "KeyBearer": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "codec",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                "mp3_44100_192",
+                "mp3_44100_128",
+                "mp3_44100_64",
+                "mp3_44100_32",
+                "mp3_44100_16",
+                "mp3_22050_192",
+                "mp3_22050_128",
+                "pcm_16000",
+                "pcm_22050",
+                "pcm_24000",
+                "pcm_44100",
+                "mulaw_8000"
+              ],
+                "default": "mp3_44100_128",
+                "title": "Output Formate"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receive_msg"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/v1/rest/speech/list_speakers": {
+        "get": {
+          "summary": "Voices",
+          "operationId": "get_speaker_endpoint_v1_rest_speech_list_speakers_get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "KeyBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/rest/speech": {
+        "post": {
+          "summary": "Text to Speech",
+          "description": "High Quality Text to Speech API helpful for all tasks from generating high quality audiobooks, to NPC Dialouge Generation ",
+          "operationId": "main_text_to_speech_v1_rest_speech_post",
+          "security": [
+            {
+              "KeyBearer": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "codec",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                "mp3_44100_192",
+                "mp3_44100_128",
+                "mp3_44100_64",
+                "mp3_44100_32",
+                "mp3_44100_16",
+                "mp3_22050_192",
+                "mp3_22050_128",
+                "pcm_16000",
+                "pcm_22050",
+                "pcm_24000",
+                "pcm_44100",
+                "mulaw_8000"
+                ],
+                "default": "mp3_44100_128",
+                "title": "Output Formate"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/receive_msg"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            },
+            "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+          }
+        }
+      },
+      "/v1/rest/speech/demo": {
+        "post": {
+          "summary": "Demo Endpoint",
+          "description": "Demonstration endpoint for Text-to-Speech functionality.",
+          "operationId": "main_demo_text_to_speech_v1_rest_speech_demo_post",
+          "parameters": [
+          {
+            "name": "codec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "mp3_44100_192",
+                "mp3_44100_128",
+                "mp3_44100_64",
+                "mp3_44100_32",
+                "mp3_44100_16",
+                "mp3_22050_192",
+                "mp3_22050_128",
+                "pcm_16000",
+                "pcm_22050",
+                "pcm_24000",
+                "pcm_44100",
+                "mulaw_8000"
+              ],
+              "default": "mp3_44100_128",
+              "title": "Output Format"
+            }
+          }
+        ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextToSpeechRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        },
+        "TextToSpeechRequest": {
+          "properties": {
+            "input": {
+              "type": "string",
+              "title": "Input",
+              "default": "SNR Audio, helps you generate High Quality, Human-Like speech at one-tenth the cost"
+            },
+            "voice": {
+              "type": "string",
+              "title": "Voice",
+              "enum": [
+                "khmet",
+                "visnas",
+                "lizzy",
+                "jeremy",
+                "duke",
+                "freya",
+                "keith",
+                "harry",
+                "elenaor",
+                "ana",
+                "chris",
+                "zelda",
+                "lily"
+              ]
+            },
+            "similarity": {
+                "type": "number",
+                "title": "Similarity",
+                "description": "Controls the similarity of generated speech to the specified voice. 0.0 means least similar, 1.0 means most similar.",
+                "default": 0.0
+            },
+            "expressiveness": {
+                "type": "number",
+                "title": "Expressiveness",
+                "description": "Controls the expressiveness of the generated speech. 0.0 means least expressive, 1.0 means most expressive.",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "default": 0.0
+            },
+            "pitch": {
+                "type": "number",
+                "title": "Pitch",
+                "description": "Controls the pitch of the generated speech. 0.5 means half the original pitch, 1.0 means original pitch, 1.5 means 1.5 times the original pitch.",
+                "minimum": 0.5,
+                "maximum": 1.5,
+                "default": 1.0
+            },
+            "speed": {
+                "type": "number",
+                "title": "Speed",
+                "description": "Controls the speed of the generated speech. 0.5 means half the original speed, 1.0 means original speed, 2.0 means twice the original speed.",
+                "minimum": 0.5,
+                "maximum": 2.0,
+                "default": 1.0
+            },
+            "model": {
               "anyOf": [
                 {
                   "type": "string"
                 },
                 {
-                  "type": "integer"
+                  "type": "null"
                 }
-              ]
+              ],
+              "title": "Model",
+              "default": "model-v2"
             },
-            "type": "array",
-            "title": "Location"
+            "language": {
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "it",
+                "pt",
+                "pl",
+                "tr",
+                "ru",
+                "ana",
+                "nl",
+                "cs",
+                "ar",
+                "zh-cn",
+                "ja",
+                "hu",
+                "ko",
+                "hi"
+              ],
+              "title": "Language",
+              "default": "en"
+            }
           },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
+          "type": "object",
+          "title": "TextToSpeechRequest",
+          "required": ["input", "voice"]
+        }
       },
-      "TextToSpeechRequest": {
-        "properties": {
-          "input": {
-            "type": "string",
-            "title": "Input",
-            "default": "SNR Audio, helps you generate High Quality, Human-Like speech at one-tenth the cost"
-          },
-          "voice": {
-            "type": "string",
-            "title": "Voice",
-            "enum": [
-              "rachel",
-              "arnold",
-              "clyde",
-              "thomas",
-              "lily",
-              "sarah",
-              "giovanni",
-              "chris",
-              "antoni",
-              "glinda",
-              "matilda"
-            ]
-          },
-          "similarity": {
-            "type": "number",
-            "title": "Similarity",
-            "description": "Controls the similarity of generated speech to the specified voice. 0.0 means least similar, 1.0 means most similar.",
-            "default": 0.0
-          },
-          "expressiveness": {
-            "type": "number",
-            "title": "Expressiveness",
-            "description": "Controls the expressiveness of the generated speech. 0.0 means least expressive, 1.0 means most expressive.",
-            "minimum": 0.0,
-            "maximum": 1.0,
-            "default": 0.0
-          },
-          "pitch": {
-            "type": "number",
-            "title": "Pitch",
-            "description": "Controls the pitch of the generated speech. 0.5 means half the original pitch, 1.0 means original pitch, 1.5 means 1.5 times the original pitch.",
-            "minimum": 0.5,
-            "maximum": 1.5,
-            "default": 1.0
-          },
-          "speed": {
-            "type": "number",
-            "title": "Speed",
-            "description": "Controls the speed of the generated speech. 0.5 means half the original speed, 1.0 means original speed, 2.0 means twice the original speed.",
-            "minimum": 0.5,
-            "maximum": 2.0,
-            "default": 1.0
-          }
-        },
-        "type": "object",
-        "title": "TextToSpeechRequest",
-        "required": ["input", "voice"]
-      }
-    },
-    "securitySchemes": {
-      "KeyBearer": {
-        "type": "http",
-        "scheme": "bearer"
+      "securitySchemes": {
+        "KeyBearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
       }
     }
   }
-}
